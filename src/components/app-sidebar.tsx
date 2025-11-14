@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Heart, User, MessageSquareHeart, ShieldCheck, UserCheck, BrainCircuit, HeartHandshake, LogOut, Loader2, Video } from 'lucide-react';
+import { Heart, User, MessageSquareHeart, ShieldCheck, UserCheck, BrainCircuit, HeartHandshake, LogOut, Loader2, Video, MessageCircle } from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,
@@ -20,6 +20,7 @@ import { useState } from 'react';
 
 const menuItems = [
   { href: '/matches', label: 'Matches', icon: Heart },
+  { href: '/chat', label: 'Messages', icon: MessageCircle, isHidden: true }, // Keep it hidden but available
   { href: '/profile', label: 'My Profile', icon: User },
   { href: '/call', label: 'Call', icon: Video, isHidden: true },
   { href: '/conversation-starters', label: 'Icebreakers', icon: MessageSquareHeart },

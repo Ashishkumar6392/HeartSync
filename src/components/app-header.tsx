@@ -12,11 +12,13 @@ const pageTitles: { [key: string]: string } = {
     '/safety-guidance': 'Safe Dating Guidance',
     '/risk-detection': 'Message Risk Detection',
     '/call': 'Video Call',
+    '/chat': 'Chat',
 };
 
 export default function AppHeader() {
   const pathname = usePathname();
-  const title = pageTitles[pathname] || 'HeartSync';
+  // Handle dynamic routes like /chat/[id]
+  const title = pageTitles[pathname] || pageTitles[`/${pathname.split('/')[1]}`] || 'HeartSync';
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-6">
