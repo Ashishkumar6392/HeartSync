@@ -49,10 +49,13 @@ export default function CallPage() {
     getPermissions();
 
     return () => {
-      stream?.getTracks().forEach(track => track.stop());
+      // Make sure to stop all tracks when the component unmounts
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [matchId]); // Rerun effect if the matchId changes, effectively re-requesting for a new call
 
   const toggleCamera = () => {
     if (stream) {
@@ -73,7 +76,9 @@ export default function CallPage() {
   };
   
   const endCall = () => {
-      stream?.getTracks().forEach(track => track.stop());
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
       toast({ title: 'Call Ended' });
       window.history.back();
   }
