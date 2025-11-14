@@ -41,6 +41,18 @@
       "description": "The current user",
       "imageUrl": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjMwMzQ3OTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person portrait"
+    },
+    {
+      "id": "user7",
+      "description": "A woman doing yoga",
+      "imageUrl": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHlvZ2F8ZW58MHx8fHwxNzYzMTg4ODU3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman yoga"
+    },
+    {
+      "id": "user8",
+      "description": "A chef cooking",
+      "imageUrl": "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwY2hlZnxlbnwwfHx8fDE3NjMxODg5MDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man cooking"
     }
   ]
 }

@@ -113,4 +113,28 @@ export const matches: User[] = [
     education: 'M.Arch',
     location: 'Boston, MA'
   },
+  {
+    id: 'user7',
+    name: 'Olivia',
+    age: 25,
+    bio: 'Yoga instructor and mindfulness advocate. I believe in living a balanced life. I enjoy green smoothies, meditation, and long walks on the beach. Looking for a genuine connection with someone who is kind and open-minded.',
+    interests: ['Yoga', 'Meditation', 'Health', 'Beach', 'Spirituality'],
+    profilePictureUrl: getImage('user7').imageUrl,
+    profilePictureHint: getImage('user7').imageHint,
+    jobTitle: 'Yoga Instructor',
+    education: 'Certified Yoga Teacher',
+    location: 'Miami, FL'
+  },
+  {
+    id: 'user8',
+    name: 'James',
+    age: 31,
+    bio: 'Chef and restaurant owner. I\'m passionate about creating unique culinary experiences. When I\'m not in the kitchen, I enjoy sailing and listening to podcasts. I appreciate a good sense of humor and a love for food.',
+    interests: ['Cooking', 'Sailing', 'Podcasts', 'Entrepreneurship', 'Wine'],
+    profilePictureUrl: getImage('user8').imageUrl,
+    profilePictureHint: getImage('user8').imageHint,
+    jobTitle: 'Head Chef',
+    education: 'Culinary Arts Degree',
+    location: 'Seattle, WA'
+  }
 ];
