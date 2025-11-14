@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -30,8 +30,9 @@ const messageSchema = z.object({
   text: z.string().min(1, 'Message cannot be empty.'),
 });
 
-export default function ChatPage({ params }: { params: { conversationId: string } }) {
-  const { conversationId } = params;
+export default function ChatPage() {
+  const params = useParams();
+  const conversationId = params.conversationId as string;
   const searchParams = useSearchParams();
   const matchId = searchParams.get('with');
 
