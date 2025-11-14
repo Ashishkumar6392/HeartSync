@@ -2,11 +2,12 @@
 
 import { firebaseConfig } from '@/firebase/config';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore'
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 
 // IMPORTANT: DO NOT MODIFY THIS FUNCTION
 export function initializeFirebase() {
+  const isDev = process.env.NODE_ENV === 'development';
   if (!getApps().length) {
     // Important! initializeApp() is called without any arguments because Firebase App Hosting
     // integrates with the initializeApp() function to provide the environment variables needed to
@@ -24,8 +25,18 @@ export function initializeFirebase() {
       }
       firebaseApp = initializeApp(firebaseConfig);
     }
+    
+    const sdks = getSdks(firebaseApp);
 
-    return getSdks(firebaseApp);
+    if (isDev) {
+      try {
+        connectAuthEmulator(sdks.auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+        connectFirestoreEmulator(sdks.firestore, '127.0.0.1', 8080);
+      } catch (e) {
+        console.warn(e);
+      }
+    }
+    return sdks;
   }
 
   // If already initialized, return the SDKs with the already initialized App
