@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -56,25 +56,25 @@ export default function CallPage() {
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [matchId]); // Rerun effect if the matchId changes, effectively re-requesting for a new call
+  }, []);
 
-  const toggleCamera = () => {
+  const toggleCamera = useCallback(() => {
     if (stream) {
       stream.getVideoTracks().forEach(track => {
         track.enabled = !isCameraOn;
       });
       setIsCameraOn(!isCameraOn);
     }
-  };
+  }, [stream, isCameraOn]);
 
-  const toggleMic = () => {
+  const toggleMic = useCallback(() => {
     if (stream) {
       stream.getAudioTracks().forEach(track => {
         track.enabled = !isMicOn;
       });
       setIsMicOn(!isMicOn);
     }
-  };
+  }, [stream, isMicOn]);
   
   const endCall = () => {
       if (stream) {
