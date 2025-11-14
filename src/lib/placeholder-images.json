@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "user1",
+      "description": "A smiling woman",
+      "imageUrl": "https://images.unsplash.com/flagged/photo-1559855603-ce4c8f480d76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3b21hbiUyMHNtaWxpbmd8ZW58MHx8fHwxNzYzMDY2ODU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman smiling"
+    },
+    {
+      "id": "user2",
+      "description": "A man hiking",
+      "imageUrl": "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtYW4lMjBoaWtpbmd8ZW58MHx8fHwxNzYzMDc3OTkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man hiking"
+    },
+    {
+      "id": "user3",
+      "description": "A person at a cafe",
+      "imageUrl": "https://images.unsplash.com/photo-1617529503942-e3dd0ef38ee5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwZXJzb24lMjBjYWZlfGVufDB8fHx8MTc2MzA3NTY0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person cafe"
+    },
+    {
+      "id": "user4",
+      "description": "A woman with a dog",
+      "imageUrl": "https://images.unsplash.com/photo-1542583479-28899e4763ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21hbiUyMGRvZ3xlbnwwfHx8fDE3NjMxMTM1NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman dog"
+    },
+    {
+      "id": "user5",
+      "description": "A man playing guitar",
+      "imageUrl": "https://images.unsplash.com/photo-1588450523206-e0b048d8f4d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtYW4lMjBndWl0YXJ8ZW58MHx8fHwxNzYzMDQxODE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man guitar"
+    },
+    {
+      "id": "user6",
+      "description": "A person painting",
+      "imageUrl": "https://images.unsplash.com/photo-1611244420030-b22f359eee31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwYWludGluZ3xlbnwwfHx8fDE3NjMxMDEyNTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person painting"
+    },
+    {
+      "id": "currentUser",
+      "description": "The current user",
+      "imageUrl": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjMwMzQ3OTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    }
+  ]
 }
