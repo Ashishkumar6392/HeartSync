@@ -14,10 +14,9 @@ export default function CallPage() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const remoteVideoRef = useRef<HTMLVideoElement>(null);
   
-  const [hasCameraPermission, setHasCameraPermission] = useState(false);
-  const [hasMicPermission, setHasMicPermission] = useState(false);
+  const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
+  const [hasMicPermission, setHasMicPermission] = useState<boolean | null>(null);
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isMicOn, setIsMicOn] = useState(true);
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -52,7 +51,8 @@ export default function CallPage() {
     return () => {
       stream?.getTracks().forEach(track => track.stop());
     };
-  }, [toast]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleCamera = () => {
     if (stream) {
@@ -75,7 +75,6 @@ export default function CallPage() {
   const endCall = () => {
       stream?.getTracks().forEach(track => track.stop());
       toast({ title: 'Call Ended' });
-      // In a real app, you'd navigate away or show a post-call summary
       window.history.back();
   }
 
@@ -108,7 +107,7 @@ export default function CallPage() {
                 ) : (
                     <div className="text-center text-muted-foreground p-4">
                         <VideoOff className="h-16 w-16 mx-auto mb-2" />
-                        <p>Waiting for permissions to start call...</p>
+                        {hasCameraPermission === null ? <p>Requesting permissions...</p> : <p>Waiting for permissions to start call...</p>}
                     </div>
                 )}
             </div>
@@ -136,7 +135,7 @@ export default function CallPage() {
           </Button>
         </CardFooter>
       </Card>
-      {(!hasCameraPermission || !hasMicPermission) && !stream && (
+      {(hasCameraPermission === false || hasMicPermission === false) && (
         <Alert variant="destructive" className="mt-4 max-w-md">
             <AlertTriangle className="h-4 w-4" />
             <AlertTitle>Permissions Required</AlertTitle>
