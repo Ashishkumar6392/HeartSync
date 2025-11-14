@@ -61,7 +61,7 @@ service cloud.firestore {
     match /conversations/{conversationId} {
       // Allow reading the conversation document (participants list, last message)
       allow get: if isParticipant(conversationId);
-      allow list: if isSignedIn() && request.auth.uid in request.query.where.participants;
+      allow list: if isSignedIn() && request.query.filters.size() > 0 && 'participants' in request.query.filters[0].field && request.auth.uid in request.query.filters[0].value;
 
       // Allow creating a conversation if the user is a participant
       // and the participants list in the new document is a list of size 2.
