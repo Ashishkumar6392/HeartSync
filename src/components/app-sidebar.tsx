@@ -21,11 +21,11 @@ import { useState } from 'react';
 const menuItems = [
   { href: '/matches', label: 'Matches', icon: Heart },
   { href: '/profile', label: 'My Profile', icon: User },
-  { href: '/call', label: 'Call', icon: Video },
-  { href: '/conversation-starters', label: 'Icebreakers', icon: MessageSquareHeart, isHidden: true },
-  { href: '/personality-analysis', label: 'Personality AI', icon: BrainCircuit, isHidden: true },
-  { href: '/safety-guidance', label: 'Safety Tips', icon: ShieldCheck, isHidden: true },
-  { href: '/risk-detection', label: 'Risk Detector', icon: UserCheck, isHidden: true },
+  { href: '/call', label: 'Call', icon: Video, isHidden: true },
+  { href: '/conversation-starters', label: 'Icebreakers', icon: MessageSquareHeart },
+  { href: '/personality-analysis', label: 'Personality AI', icon: BrainCircuit },
+  { href: '/safety-guidance', label: 'Safety Tips', icon: ShieldCheck },
+  { href: '/risk-detection', label: 'Risk Detector', icon: UserCheck },
 ];
 
 function HeartSyncLogo() {

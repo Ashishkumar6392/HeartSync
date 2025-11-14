@@ -25,9 +25,10 @@ export default function CallPage() {
   const match = matches.find(m => m.id === matchId);
 
   useEffect(() => {
+    let mediaStream: MediaStream | null = null;
     const getPermissions = async () => {
       try {
-        const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         setStream(mediaStream);
         setHasCameraPermission(true);
         setHasMicPermission(true);
@@ -50,8 +51,8 @@ export default function CallPage() {
 
     return () => {
       // Make sure to stop all tracks when the component unmounts
-      if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+      if (mediaStream) {
+        mediaStream.getTracks().forEach(track => track.stop());
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
