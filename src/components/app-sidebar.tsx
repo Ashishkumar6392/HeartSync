@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Heart, User, MessageSquareHeart, ShieldCheck, UserCheck, BrainCircuit, HeartHandshake, LogOut, Loader2 } from 'lucide-react';
+import { Heart, User, MessageSquareHeart, ShieldCheck, UserCheck, BrainCircuit, HeartHandshake, LogOut, Loader2, Video } from 'lucide-react';
 import {
   Sidebar,
   SidebarHeader,
@@ -21,10 +21,11 @@ import { useState } from 'react';
 const menuItems = [
   { href: '/matches', label: 'Matches', icon: Heart },
   { href: '/profile', label: 'My Profile', icon: User },
-  { href: '/conversation-starters', label: 'Icebreakers', icon: MessageSquareHeart },
-  { href: '/personality-analysis', label: 'Personality AI', icon: BrainCircuit },
-  { href: '/safety-guidance', label: 'Safety Tips', icon: ShieldCheck },
-  { href: '/risk-detection', label: 'Risk Detector', icon: UserCheck },
+  { href: '/call', label: 'Call', icon: Video },
+  { href: '/conversation-starters', label: 'Icebreakers', icon: MessageSquareHeart, isHidden: true },
+  { href: '/personality-analysis', label: 'Personality AI', icon: BrainCircuit, isHidden: true },
+  { href: '/safety-guidance', label: 'Safety Tips', icon: ShieldCheck, isHidden: true },
+  { href: '/risk-detection', label: 'Risk Detector', icon: UserCheck, isHidden: true },
 ];
 
 function HeartSyncLogo() {
@@ -77,7 +78,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
-          {menuItems.map((item) => (
+          {menuItems.filter(item => !item.isHidden).map((item) => (
             <SidebarMenuItem key={item.label}>
               <Link href={item.href} legacyBehavior passHref>
                 <SidebarMenuButton

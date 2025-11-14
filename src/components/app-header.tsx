@@ -11,6 +11,7 @@ const pageTitles: { [key: string]: string } = {
     '/personality-analysis': 'Personality Analysis',
     '/safety-guidance': 'Safe Dating Guidance',
     '/risk-detection': 'Message Risk Detection',
+    '/call': 'Video Call',
 };
 
 export default function AppHeader() {

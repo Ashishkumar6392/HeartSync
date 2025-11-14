@@ -1,9 +1,10 @@
 import type { User } from '@/lib/data';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Heart, MessageCircle, X } from 'lucide-react';
+import { Heart, MessageCircle, Video, X } from 'lucide-react';
 
 interface MatchCardProps {
   user: User;
@@ -36,7 +37,7 @@ export function MatchCard({ user }: MatchCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="grid grid-cols-3 gap-2 p-4 bg-card">
+      <CardFooter className="grid grid-cols-4 gap-2 p-4 bg-card">
         <Button variant="outline" size="icon" className="h-14 w-full rounded-full border-destructive/50 text-destructive hover:bg-destructive/10 hover:text-destructive">
             <X className="h-7 w-7" />
         </Button>
@@ -46,6 +47,11 @@ export function MatchCard({ user }: MatchCardProps) {
         <Button variant="outline" size="icon" className="h-14 w-full rounded-full border-accent/50 text-accent hover:bg-accent/10 hover:text-accent">
             <MessageCircle className="h-7 w-7" />
         </Button>
+        <Link href={`/call?with=${user.id}`} passHref>
+          <Button variant="outline" size="icon" className="h-14 w-full rounded-full border-green-500/50 text-green-500 hover:bg-green-500/10 hover:text-green-500">
+            <Video className="h-7 w-7" />
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
