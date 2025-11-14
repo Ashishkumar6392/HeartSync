@@ -33,6 +33,10 @@ service cloud.firestore {
     function isOwner(userId) {
       return request.auth.uid == userId;
     }
+    
+    function isParticipant(conversationId) {
+      return isSignedIn() && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants;
+    }
 
     /**
      * @description Secure user accounts. Only the user with the matching userId can access their data.
@@ -55,14 +59,8 @@ service cloud.firestore {
      * Access is granted only to participants of the conversation.
      */
     match /conversations/{conversationId} {
-      function isParticipant() {
-        // For reads, check existing document. For writes, check incoming document.
-        let participants = exists(path) ? resource.data.participants : request.resource.data.participants;
-        return isSignedIn() && request.auth.uid in participants;
-      }
-
       // Allow reading the conversation document (participants list, last message)
-      allow get: if isParticipant();
+      allow get: if isParticipant(conversationId);
       allow list: if isSignedIn() && request.auth.uid in request.query.where.participants;
 
       // Allow creating a conversation if the user is a participant
@@ -73,7 +71,7 @@ service cloud.firestore {
                        request.resource.data.participants.size() == 2;
 
       // Allow updating (e.g., lastMessage) if the user is a participant.
-      allow update: if isParticipant();
+      allow update: if isParticipant(conversationId);
 
       // Disallow deleting conversations.
       allow delete: if false;
@@ -83,10 +81,10 @@ service cloud.firestore {
        */
       match /messages/{messageId} {
         // Allow reading messages if the user is a participant in the parent conversation.
-        allow get, list: if isParticipant();
+        allow get, list: if isParticipant(conversationId);
 
         // Allow creating a message if the user is a participant and the senderId matches their UID.
-        allow create: if isParticipant() && request.resource.data.senderId == request.auth.uid;
+        allow create: if isParticipant(conversationId) && request.resource.data.senderId == request.auth.uid;
 
         // Disallow updating or deleting messages to maintain chat history integrity.
         allow update, delete: if false;
