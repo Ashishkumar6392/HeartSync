@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "UserAccount": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserAccount",
+      "type": "object",
+      "description": "Stores user account information for login and signup.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user account. (Primary Key)"
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address for login.",
+          "format": "email"
+        }
+      },
+      "required": [
+        "id",
+        "email"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "UserAccount",
+          "schema": {
+            "$ref": "#/backend/entities/UserAccount"
+          },
+          "description": "Stores user account information. Only the user with the corresponding userId can access this data. Includes denormalized 'userId' for simple security rules.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure prioritizes security and scalability for the HeartSync dating app, focusing on authorization independence and clear access patterns.  The core structure is built around user-owned data and collaborative data with a membership-based access control model. Login/Signup features utilize email/password authentication and anonymous authentication.\n\n**Authorization Independence:**\n\n*   The structure avoids hierarchical `get()` calls in security rules by denormalizing authorization context where necessary. This is especially crucial for collaborative data and ensures that rules can be evaluated without fetching parent document data, simplifying transactions and improving scalability.\n\n**Structural Segregation:**\n\n*   Different data types with different security needs are stored in separate collections.  For example, user accounts are stored under `/users/{userId}`, ensuring that they are only accessible to the authenticated user.  There are no global roles, all roles must exist inside of the database.\n\n**Access Modeling:**\n\n*   **Private Data:** User account information is stored under `/users/{userId}`, which enables path-based authorization.  Only the authenticated user with a matching `userId` can access their own data.\n\n**QAPs Support:**\n\n*   The use of path-based ownership (`/users/{userId}/...`) ensures secure `list` operations. Security rules can easily restrict listing to the current user's data. The membership map pattern also enables secure listing of collaborative data based on membership roles.\n"
+  }
+}

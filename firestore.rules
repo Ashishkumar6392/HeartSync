@@ -1,0 +1,54 @@
+/**
+ * @file Firebase Security Rules for HeartSync Dating App
+ *
+ * @description This ruleset enforces a strict user-ownership model for user accounts.
+ * All data is nested under /users/{userId}, ensuring only the authenticated user can access their own data.
+ *
+ * @dataStructure
+ * - /users/{userId}: Stores user account information, accessible only to the user with the matching userId.
+ *
+ * @keySecurityDecisions
+ * - Disallows user listing to protect privacy.
+ * - Enforces ownership for all data under /users/{userId}.
+ *
+ * @denormalizationForAuthorization
+ * - User account documents under /users/{userId} contain a denormalized `id` field that must match the `userId` in the path. This simplifies ownership checks and avoids costly `get()` calls.
+ *
+ * @structuralSegregation
+ * - User account data is stored in a dedicated /users/{userId} collection to ensure privacy and prevent accidental public exposure.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Secure user accounts. Only the user with the matching userId can access their data.
+     * @path /users/{userId}
+     * @allow (create) - Authenticated user creates their own account with matching userId and id.
+     * @allow (get, update, delete) - Authenticated user with matching userId accesses their own account.
+     * @deny (create) - User tries to create an account with a mismatched userId.
+     * @deny (get, update, delete) - User tries to access another user's account.
+     * @principle Enforces document ownership for all operations. Validates id on create.
+     */
+    match /users/{userId} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+
+      function isExistingOwner(userId) {
+        return isOwner(userId) && resource != null;
+      }
+
+      allow get: if isOwner(userId);
+      allow list: if false;
+
+      allow create: if isSignedIn() && isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+    }
+  }
+}
