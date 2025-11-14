@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Lightbulb, Loader2 } from 'lucide-react';
+import { Briefcase, GraduationCap, Lightbulb, Loader2, MapPin } from 'lucide-react';
 import type { SuggestProfileImprovementsOutput } from '@/ai/flows/suggest-profile-improvements';
 import { suggestProfileImprovements } from '@/ai/flows/suggest-profile-improvements';
 import { useToast } from '@/hooks/use-toast';
@@ -22,6 +22,9 @@ const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   age: z.coerce.number().min(18, "You must be at least 18."),
   bio: z.string().max(500, "Bio can't be more than 500 characters.").min(10, "Bio should be at least 10 characters."),
+  jobTitle: z.string().min(2, "Job title must be at least 2 characters."),
+  education: z.string().min(2, "Education must be at least 2 characters."),
+  location: z.string().min(2, "Location must be at least 2 characters."),
 });
 
 export default function ProfilePage() {
@@ -35,6 +38,9 @@ export default function ProfilePage() {
       name: currentUser.name,
       age: currentUser.age,
       bio: currentUser.bio,
+      jobTitle: currentUser.jobTitle,
+      education: currentUser.education,
+      location: currentUser.location,
     },
   });
 
@@ -112,7 +118,7 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
       </div>
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 space-y-6">
         <Card>
           <CardHeader>
             <CardTitle>Edit Profile</CardTitle>
@@ -166,6 +172,59 @@ export default function ProfilePage() {
               </form>
             </Form>
           </CardContent>
+        </Card>
+        
+        <Card>
+            <CardHeader>
+                <CardTitle>About Me</CardTitle>
+                <CardDescription>Add more details to your profile.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <FormField
+                            control={form.control}
+                            name="jobTitle"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel className="flex items-center"><Briefcase className="mr-2 h-4 w-4" /> Job Title</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., Software Engineer" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="education"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel className="flex items-center"><GraduationCap className="mr-2 h-4 w-4" /> Education</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., B.S. in Computer Science" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="location"
+                            render={({ field }) => (
+                                <FormItem>
+                                <FormLabel className="flex items-center"><MapPin className="mr-2 h-4 w-4" /> Location</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g., San Francisco, CA" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button type="submit">Save About Me</Button>
+                    </form>
+                </Form>
+            </CardContent>
         </Card>
       </div>
     </div>

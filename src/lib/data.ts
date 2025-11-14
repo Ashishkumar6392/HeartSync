@@ -9,6 +9,9 @@ export interface User {
   interests: string[];
   profilePictureUrl: string;
   profilePictureHint: string;
+  jobTitle: string;
+  education: string;
+  location: string;
 }
 
 const getImage = (id: string): ImagePlaceholder => {
@@ -32,6 +35,9 @@ export const currentUser: User = {
   interests: ['Hiking', 'Cooking', 'Dogs', 'Live Music', 'Technology'],
   profilePictureUrl: getImage('currentUser').imageUrl,
   profilePictureHint: getImage('currentUser').imageHint,
+  jobTitle: 'Software Engineer',
+  education: 'B.S. in Computer Science',
+  location: 'San Francisco, CA'
 };
 
 export const matches: User[] = [
@@ -43,6 +49,9 @@ export const matches: User[] = [
     interests: ['Art', 'Coffee', 'Baking', 'Movies', 'Board Games'],
     profilePictureUrl: getImage('user1').imageUrl,
     profilePictureHint: getImage('user1').imageHint,
+    jobTitle: 'Graphic Designer',
+    education: 'B.F.A. in Graphic Design',
+    location: 'Brooklyn, NY'
   },
   {
     id: 'user2',
@@ -52,6 +61,9 @@ export const matches: User[] = [
     interests: ['Fitness', 'Climbing', 'Hiking', 'Running', 'Travel'],
     profilePictureUrl: getImage('user2').imageUrl,
     profilePictureHint: getImage('user2').imageHint,
+    jobTitle: 'Personal Trainer',
+    education: 'Certified Personal Trainer',
+    location: 'Denver, CO'
   },
   {
     id: 'user3',
@@ -61,6 +73,9 @@ export const matches: User[] = [
     interests: ['Reading', 'Travel', 'Wine', 'Photography', 'History'],
     profilePictureUrl: getImage('user3').imageUrl,
     profilePictureHint: getImage('user3').imageHint,
+    jobTitle: 'Librarian',
+    education: 'M.L.I.S.',
+    location: 'Chicago, IL'
   },
   {
     id: 'user4',
@@ -70,6 +85,9 @@ export const matches: User[] = [
     interests: ['Animals', 'Dogs', 'Movies', 'Volunteering', 'Gardening'],
     profilePictureUrl: getImage('user4').imageUrl,
     profilePictureHint: getImage('user4').imageHint,
+    jobTitle: 'Veterinarian',
+    education: 'D.V.M.',
+    location: 'Austin, TX'
   },
   {
     id: 'user5',
@@ -79,6 +97,9 @@ export const matches: User[] = [
     interests: ['Music', 'Piano', 'Concerts', 'Teaching', 'Jazz'],
     profilePictureUrl: getImage('user5').imageUrl,
     profilePictureHint: getImage('user5').imageHint,
+    jobTitle: 'Music Teacher',
+    education: 'B.A. in Music Education',
+    location: 'Nashville, TN'
   },
   {
     id: 'user6',
@@ -88,5 +109,8 @@ export const matches: User[] = [
     interests: ['Architecture', 'Foodie', 'Photography', 'City Exploration', 'Design'],
     profilePictureUrl: getImage('user6').imageUrl,
     profilePictureHint: getImage('user6').imageHint,
+    jobTitle: 'Architect',
+    education: 'M.Arch',
+    location: 'Boston, MA'
   },
 ];
